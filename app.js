@@ -13,16 +13,13 @@ app.get('*', (req, res) => {
         responseType: 'arraybuffer'
     })
         .then(response => {
-            if (response.headers['content-type'].split('/')[0] == 'image') {
 
                 res.set('Content-Type', response.headers['content-type']);
 
                 if(typeof response.data === 'object') res.send(response.data);
                 res.send(Buffer.from(response.data, 'binary'));
-            }
-            else {
-                throw new Error('Not an image');
-            }
+            
+            
         })
         .catch(err => {
             // console.log(err.message);
